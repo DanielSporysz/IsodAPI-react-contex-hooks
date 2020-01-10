@@ -2,3 +2,21 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+h1,
+div.filter{
+  text-align: center
+}
+
+table {
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+}
+table thead tr {
+  height: 60px;
+}
+table tbody tr {
+  height: 50px;
+}

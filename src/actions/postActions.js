@@ -7,34 +7,8 @@ export const fetchOffers = () => dispatch => {
 };
 
 const receiveOffers = (payload) => {
-    let promoters =  scrapPromoters(payload.list);
-    promoters = ["wszystkie", ...promoters];
-    let origins = scrapOrigins(payload.list);
-    origins = ["wszystkie", ...origins];
-
-    return {
+    return{
         type: FETCH_OFFERS,
         offers: payload.list,
-        promoters: promoters,
-        origins: origins,
-    }
+    };
 };
-
-const scrapPromoters = (offers) => {
-    const promoters = offers.map(off => {
-        const {supervisor_firstname, supervisor_lastname, supervisor_title} = off;
-        return supervisor_title + " " + supervisor_firstname + " " + supervisor_lastname
-    });
-
-    return [... new Set(promoters)]
-};
-
-const scrapOrigins = (offers) => {
-    const origins = offers.map(off => {
-        const {mainOrgUnit} = off;
-        return mainOrgUnit
-    });
-
-    return [... new Set(origins)]
-};
-
