@@ -1,6 +1,5 @@
 import React, {Component} from "react"
-import {connect} from "react-redux"
-import PropTypes from "prop-types"
+import {Consumer} from "../index";
 
 function OfferTableHeader(props) {
     let header = props.data;
@@ -23,36 +22,19 @@ function OfferTable(props) {
 }
 
 class Table extends Component {
-    static propTypes = {
-        offers: PropTypes.array,
-        filteredOffers: PropTypes.array,
-    };
-
     render() {
-        let offersToDisplay;
-        if (this.props.filteredOffers) {
-            offersToDisplay = this.props.filteredOffers;
-        } else {
-            offersToDisplay = this.props.offers;
-        }
-
-        return <div>
-            <table>
-                <tr><OfferTableHeader data={["ID", "Tytuł", "Opiekun", "Jednostka Organizacyjna", "Status"]}/></tr>
-                {offersToDisplay.map(offer =>
-                    <tbody key={offer.id}>
-                    <OfferTable data={offer}/>
-                    </tbody>)}
-            </table>
-        </div>
+        return <Consumer>
+            {context => (<div>
+                <table>
+                    <tr><OfferTableHeader data={["ID", "Tytuł", "Opiekun", "Jednostka Organizacyjna", "Status"]}/></tr>
+                    {context.state.filteredOffers.map(offer =>
+                        <tbody key={offer.id}>
+                        <OfferTable data={offer}/>
+                        </tbody>)}
+                </table>
+            </div>)}
+        </Consumer>
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        offers: state.postReducer.offers,
-        filteredOffers: state.filterReducer.filteredOffers
-    }
-};
-
-export default connect(mapStateToProps)(Table)
+export default Table
