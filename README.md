@@ -1,5 +1,5 @@
-# IsodAPI-react-redux
+# IsodAPI-redux-contex-hooks
 
 Application uses the API of ISOD (https://isod.ee.pw.edu.pl/isod-portal/wapi-docs/) to browse and filter list of available theses.
 
-Built with React and redux.
+Built with React and contex+hooks.
